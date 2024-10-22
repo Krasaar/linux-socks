@@ -1,3 +1,0 @@
-/home/krasaar/repo/c_projects/sockets/cmake/cmake_auto_generated/CMakeFiles/sockets.dir
-/home/krasaar/repo/c_projects/sockets/cmake/cmake_auto_generated/CMakeFiles/edit_cache.dir
-/home/krasaar/repo/c_projects/sockets/cmake/cmake_auto_generated/CMakeFiles/rebuild_cache.dir

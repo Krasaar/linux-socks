@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/sockets.dir/home/krasaar/repo/c_projects/sockets/source/main.c.o -o /home/krasaar/repo/c_projects/sockets/bin/Debug--bin/sockets 
