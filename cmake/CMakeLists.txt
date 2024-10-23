@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.28.3)
-project(sockets)
-
+set(project_base_name sockets)
+project(${project_base_name})
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
 	message("BUILD FAILED! Parameter CMAKE_BUILD_TYPE not specified")
 	return()
@@ -28,16 +28,13 @@ if ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "")
 endif()
 
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
-	message("building debug")
-	set(project_name "sockets-d")
+	set(project_name_typed "${project_base_name}-d")
 elseif("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
-	message("building release")
-	set(project_name "sockets")
+	set(project_name_typed "${project_base_name}")
 else()
 	# currently no other build types are supported. 
 	# cmake build command will return early
-	message("building ${CMAKE_BUILD_TYPE}")
-	set(project_name "sockets-${CMAKE_BUILD_TYPE}")
+	set(project_name_typed "${project_base_name}-${CMAKE_BUILD_TYPE}")
 endif()
 
 # enable_testing()
@@ -84,14 +81,16 @@ block(PROPAGATE PROJECT_SOURCE_FILES)
 	set(PROJECT_SOURCE_FILES ${templist})
 endblock()
 
-add_executable("${project_name}.bin" ${PROJECT_SOURCE_FILES} )
-
+add_executable("${project_name_typed}.bin" ${PROJECT_SOURCE_FILES} )
 # it's to determine output of static libs
 # ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}" 
 # if I understand correctly it's for DLLs
 # LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}"
 
-set_target_properties("${project_name}.bin"
-    PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+set_target_properties("${project_name_typed}.bin"
+PROPERTIES
+RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
 )
+
+message("\nBuild set to ${CMAKE_BUILD_TYPE} configuration. Output:")
+message("${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${project_name_typed}.bin\n")
